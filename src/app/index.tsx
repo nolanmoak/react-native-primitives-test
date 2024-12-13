@@ -1,3 +1,4 @@
+import ThemeToggle from '@/components/theme-toggle';
 import { Text, View } from 'react-native';
 
 export default function Index() {
@@ -9,7 +10,9 @@ export default function Index() {
         alignItems: 'center',
       }}
     >
-      <Text className='text-4xl'>Edit app/index.tsx to edit this screen.</Text>
+      <ThemeToggle />
+
+      <Text className='text-4xl text-primary'>Edit app/index.tsx to edit this screen.</Text>
     </View>
   );
 }
