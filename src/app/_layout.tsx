@@ -1,14 +1,17 @@
 import '~/globals.css';
 
-import { setAndroidNavigationBar } from '@/lib/android-navigation-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
-import { SplashScreen, Stack } from 'expo-router';
+import { PortalHost } from '@rn-primitives/portal';
+import { Slot, SplashScreen } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { NAV_THEME } from '~/constants/nav-theme-colors';
 import { useColorScheme } from '~/hooks/useColorScheme';
+import { setAndroidNavigationBar } from '~/lib/android-navigation-bar';
+import NavBar from '../components/nav-bar';
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -66,8 +69,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Stack />
+      <SafeAreaView className='flex-1 bg-background'>
+        <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
+        <NavBar />
+        <Slot />
+        <PortalHost />
+      </SafeAreaView>
     </ThemeProvider>
   );
 }
